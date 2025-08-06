@@ -22,7 +22,7 @@ static void longRainbowButtonFunc()
     Controller::GetInstance()->setNextPage(RAINBOW_PAGE_ID);
 }
 
-static void toggleLeds1()
+static void toggleStrip()
 {
     LedController::GetInstance()->toggleLedRelay1();
 }
@@ -30,21 +30,21 @@ static void toggleLeds1()
 MenuPage::MenuPage() :
     staticButton(MENU_BUTTONS_SPACE, MENU_BUTTONS_SPACE, MENU_BUTTONS_SIZE, MENU_BUTTONS_SIZE, "Static"),
     rainbowButton(MENU_BUTTONS_SPACE * 2 + MENU_BUTTONS_SIZE, MENU_BUTTONS_SPACE, MENU_BUTTONS_SIZE, MENU_BUTTONS_SIZE, "Rainbow"),
-    toggleButton(MENU_BUTTONS_SPACE, MENU_BUTTONS_SPACE * 2 + MENU_BUTTONS_SIZE, MENU_BUTTONS_SIZE, MENU_BUTTONS_SIZE, "LEDS 1")
+    stripToggleButton(MENU_BUTTONS_SPACE, MENU_BUTTONS_SPACE * 2 + MENU_BUTTONS_SIZE, MENU_BUTTONS_SIZE, MENU_BUTTONS_SIZE, "Strip")
 {
     staticButton.setPressFunction(&shortStaticButtonFunc);
     staticButton.setHoldFunction(&longStaticButtonFunc);
     rainbowButton.setPressFunction(&shortRainbowButtonFunc);
     rainbowButton.setHoldFunction(&longRainbowButtonFunc);
-    toggleButton.setPressFunction(&toggleLeds1);
-    toggleButton.setSecondaryPressFunction(&toggleLeds1);
+    stripToggleButton.setPressFunction(&toggleStrip);
+    stripToggleButton.setSecondaryPressFunction(&toggleStrip);
 }
 
 void MenuPage::drawPage()
 {
     staticButton.drawButton();
     rainbowButton.drawButton();
-    toggleButton.drawButton();
+    stripToggleButton.drawButton();
 }
 
 void MenuPage::handleTouch(const InputEvent &event)
@@ -53,7 +53,7 @@ void MenuPage::handleTouch(const InputEvent &event)
         return;
     if (rainbowButton.handleButtonTouch(event))
         return;
-    if (toggleButton.handleButtonTouch(event))
+    if (stripToggleButton.handleButtonTouch(event))
         return;
 }
 

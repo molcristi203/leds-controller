@@ -6,8 +6,6 @@
 #include <URTouch.h>
 #include "pages/ScreenPage.h"
 
-#define MAX_PAGES (3)
-
 enum PagesIds : uint8_t
 {
     MENU_PAGE_ID,
@@ -18,6 +16,8 @@ enum PagesIds : uint8_t
 class Controller
 {
     private:
+        static constexpr uint8_t MAX_PAGES = 3;
+
         UTFT* tft = nullptr;
         URTouch* touch = nullptr;
 

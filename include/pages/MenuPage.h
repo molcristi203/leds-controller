@@ -15,7 +15,7 @@ class MenuPage : public ScreenPage
 
         ComplexButton staticButton;
         ComplexButton rainbowButton;
-        ToggleButton toggleButton;
+        ToggleButton stripToggleButton;
     public:
         MenuPage();
         void drawPage() override;

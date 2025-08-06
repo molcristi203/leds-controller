@@ -8,10 +8,6 @@
 #include "leds/StaticLeds.h"
 #include "leds/RainbowLeds.h"
 
-#define PIN_LED_RELAY1 A8
-#define PIN_LED_DATA1 8
-#define NUM_LEDS1 20
-
 enum LedsEffects : uint8_t
 {
     LEDS_STATIC,
@@ -21,7 +17,11 @@ enum LedsEffects : uint8_t
 class LedController
 {
     private:
-        CRGB leds1[NUM_LEDS1];
+        static constexpr uint8_t PIN_STRIP_RELAY = A8;
+        static constexpr uint8_t PIN_STRIP_DATA = 8;
+        static constexpr uint16_t NUM_STRIP_LEDS = 20;
+
+        CRGB leds1[NUM_STRIP_LEDS];
 
         StaticLeds staticLeds;
         RainbowLeds rainbowLeds;

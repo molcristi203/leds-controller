@@ -3,14 +3,14 @@
 LedController* LedController::instance{nullptr};
 
 LedController::LedController()
-: staticLeds(leds1, NUM_LEDS1), rainbowLeds(leds1, NUM_LEDS1)
+: staticLeds(leds1, NUM_STRIP_LEDS), rainbowLeds(leds1, NUM_STRIP_LEDS)
 {
-    FastLED.addLeds<WS2812B, PIN_LED_DATA1, GRB>(leds1, NUM_LEDS1);
+    FastLED.addLeds<WS2812B, PIN_STRIP_DATA, GRB>(leds1, NUM_STRIP_LEDS);
     FastLED.setBrightness(10);
     currentLeds = &staticLeds;
     currentLeds->applyToLeds();
-    pinMode(PIN_LED_RELAY1, OUTPUT);
-    digitalWrite(PIN_LED_RELAY1, relay1State);
+    pinMode(PIN_STRIP_RELAY, OUTPUT);
+    digitalWrite(PIN_STRIP_RELAY, relay1State);
 }
 
 LedController* LedController::GetInstance()
@@ -45,7 +45,7 @@ void LedController::toggleLedRelay1()
     }
 
     Serial.println(relay1State);
-    digitalWrite(PIN_LED_RELAY1, relay1State);
+    digitalWrite(PIN_STRIP_RELAY, relay1State);
 }
 
 void LedController::changeLedsEffect(LedsEffects ledsEffect)
