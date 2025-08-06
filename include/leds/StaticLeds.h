@@ -1,0 +1,23 @@
+#ifndef StaticLeds_H
+#define StaticLeds_H
+
+#include "BaseLeds.h"
+#include "utils/Types.h"
+
+class StaticLeds : public BaseLeds
+{
+    private:
+        RGBstruct rgb = {
+            .red = 255,
+            .green = 255,
+            .blue = 255
+        };
+    public:
+        StaticLeds(CRGB* ledsArray, uint16_t ledsNum);
+        void setRGB(uint8_t red, uint8_t green, uint8_t blue);
+        void getRGB(uint8_t &red, uint8_t &green, uint8_t &blue);
+        void applyToLeds() override;
+        void refreshLeds() override;
+};
+
+#endif
