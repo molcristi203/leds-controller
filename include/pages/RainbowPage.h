@@ -4,6 +4,7 @@
 #include "ScreenPage.h"
 #include "components/SimpleButton.h"
 #include "utils/LedController.h"
+#include "components/Label.h"
 
 class RainbowPage : public ScreenPage
 {
@@ -14,11 +15,15 @@ class RainbowPage : public ScreenPage
         SimpleButton staticRainbowButton;
         SimpleButton dynamicRainbowButton;
         SimpleButton menuButton;
+        SimpleButton decreaseSpeedButton;
+        SimpleButton increaseSpeedButton;
+        Label speedLabel;
     public:
         RainbowPage();
         void drawPage() override;
         void handleTouch(const InputEvent &event) override;
         void onPageChanged() override;
+        void updateLabel();
 };
 
 #endif

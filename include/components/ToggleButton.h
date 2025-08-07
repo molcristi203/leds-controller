@@ -9,6 +9,8 @@
 class ToggleButton : public SimpleButton
 {
     private:
+        static constexpr uint32_t BUTTON_TOGGLE_COLOR = VGA_GREEN;
+
         uint8_t state = TOGGLE_BUTTON_OFF;
         void (*secondaryPressFunction)();
     public:

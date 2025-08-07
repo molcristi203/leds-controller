@@ -90,22 +90,23 @@ void ToggleButton::drawButton()
     UTFT* tft = Controller::GetInstance()->getTFT();
     if (state == TOGGLE_BUTTON_ON)
     {
-        tft->setColor(VGA_GREEN);
-        tft->setBackColor(VGA_GREEN);
+        tft->setColor(BUTTON_TOGGLE_COLOR);
+        tft->setBackColor(BUTTON_TOGGLE_COLOR);
     }
     else
     {
-        tft->setColor(VGA_BLUE);
-        tft->setBackColor(VGA_BLUE);
+        tft->setColor(BUTTON_BACKGROUND_COLOR);
+        tft->setBackColor(BUTTON_BACKGROUND_COLOR);
     }
 
     tft->fillRoundRect(posX, posY, posX + width, posY + height);
-    tft->setColor(VGA_WHITE);
+    tft->setColor(BUTTON_OUTLINE_COLOR);
     tft->drawRoundRect(posX, posY, posX + width, posY + height);
 
     uint16_t textX = ((width/2) - ((strlen(label) * tft->getFontXsize())/2)) + posX;
     uint16_t textY = (height/2) - (tft->getFontYsize()/2) + posY;
 
+    tft->setColor(BUTTON_TEXT_COLOR);
     tft->print(label, textX, textY);
 }
 

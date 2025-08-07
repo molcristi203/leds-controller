@@ -19,6 +19,8 @@ class LedController
     private:
         static constexpr uint8_t PIN_STRIP_RELAY = A8;
         static constexpr uint8_t PIN_STRIP_DATA = 8;
+        static constexpr uint8_t PIN_LAMP_RELAY = A9;
+        static constexpr uint8_t PIN_LAMP_DATA = 9;
         static constexpr uint16_t NUM_STRIP_LEDS = 20;
 
         CRGB leds1[NUM_STRIP_LEDS];
@@ -27,7 +29,8 @@ class LedController
         RainbowLeds rainbowLeds;
         BaseLeds* currentLeds = nullptr;
 
-        volatile uint8_t relay1State = LOW;
+        volatile uint8_t relayStripState = LOW;
+        volatile uint8_t relayLampState = LOW;
 
         static LedController* instance;
         LedController();
@@ -44,7 +47,12 @@ class LedController
         void changeLedsEffect(LedsEffects ledsEffect);
         void refreshLeds();
 
-        void toggleLedRelay1();
+        void toggleStripRelay();
+        void toggleLampRelay();
+
+        void increaseRainbowSpeed();
+        void decreaseRainbowSpeed();
+        uint8_t getHueChangeDelayIndex();
 };
 
 #endif

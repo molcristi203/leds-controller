@@ -11,19 +11,24 @@ enum RainbowTypes : uint8_t
 
 class RainbowLeds : public BaseLeds
 {
-    private:
-        static constexpr uint8_t hueIncrement = 3;
-        static constexpr uint8_t deltaHue = 3;
-        static constexpr uint64_t hueChangeDelay = 100;
-
-        uint8_t initialHue = 0;
-        uint64_t hueChangeTime = 0;
-        RainbowTypes rainbowType = STATIC_RAINBOW;
     public:
+        static constexpr uint8_t MAX_DELAYS = 3u;
         RainbowLeds(CRGB* ledsArray, uint16_t ledsNum);
         void applyToLeds() override;
         void refreshLeds() override;
         void changeRainbowType(RainbowTypes rainbowType);
+        uint8_t getHueChangeDelayIndex();
+        void setHueChangeDelayIndex(uint8_t hueChangeDelayIndex);
+
+    private:
+        static constexpr uint8_t HUE_INCREMENT = 1u;
+        static constexpr uint8_t DELTA_HUE = 1u;
+        uint64_t HUE_CHANGE_DELAYS[MAX_DELAYS] = {75u, 50u, 25u};
+
+        uint8_t initialHue = 0u;
+        uint64_t hueChangeTime = 0u;
+        uint8_t hueChangeDelayIndex = 1u;
+        RainbowTypes rainbowType = STATIC_RAINBOW;
 };
 
 #endif

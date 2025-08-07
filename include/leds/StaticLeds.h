@@ -8,9 +8,9 @@ class StaticLeds : public BaseLeds
 {
     private:
         RGBstruct rgb = {
-            .red = 255,
-            .green = 255,
-            .blue = 255
+            .red = 255u,
+            .green = 255u,
+            .blue = 255u
         };
     public:
         StaticLeds(CRGB* ledsArray, uint16_t ledsNum);

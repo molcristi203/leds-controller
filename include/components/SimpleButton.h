@@ -10,6 +10,10 @@ class SimpleButton
 {
     protected:
         static constexpr uint64_t BUTTON_PRESS_TIME = 100u;
+        static constexpr uint32_t BUTTON_BACKGROUND_COLOR = VGA_BLUE;
+        static constexpr uint32_t BUTTON_OUTLINE_COLOR = VGA_WHITE;
+        static constexpr uint32_t BUTTON_HIGHLIGHT_COLOR = VGA_AQUA;
+        static constexpr uint32_t BUTTON_TEXT_COLOR = VGA_WHITE;
 
         uint16_t posX = 0u, posY = 0u, width = 0u, height = 0u;
         const char* label = nullptr;

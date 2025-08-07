@@ -6,8 +6,8 @@
 class BaseLeds
 {
     protected:
-        CRGB* leds;
-        uint16_t ledsNumber;
+        CRGB* leds = nullptr;
+        uint16_t ledsNumber = 0u;
     public:
         BaseLeds(CRGB* ledsArray, uint16_t ledsNum) : leds{ledsArray}, ledsNumber{ledsNum} {};
         virtual void applyToLeds();

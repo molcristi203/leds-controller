@@ -6,15 +6,16 @@ SimpleButton::SimpleButton(uint16_t x, uint16_t y, uint16_t w, uint16_t h, const
 void SimpleButton::drawButton()
 {
     UTFT* tft = Controller::GetInstance()->getTFT();
-    tft->setColor(VGA_BLUE);
+    tft->setColor(BUTTON_BACKGROUND_COLOR);
     tft->fillRoundRect(posX, posY, posX + width, posY + height);
-    tft->setColor(VGA_WHITE);
+    tft->setColor(BUTTON_OUTLINE_COLOR);
     tft->drawRoundRect(posX, posY, posX + width, posY + height);
 
     uint16_t textX = ((width/2) - ((strlen(label) * tft->getFontXsize())/2)) + posX;
     uint16_t textY = (height/2) - (tft->getFontYsize()/2) + posY;
 
-    tft->setBackColor(VGA_BLUE);
+    tft->setColor(BUTTON_TEXT_COLOR);
+    tft->setBackColor(BUTTON_BACKGROUND_COLOR);
     tft->print(label, textX, textY);
 }
 
@@ -89,14 +90,14 @@ void SimpleButton::setPressFunction(void (*pressFunction)(void))
 void SimpleButton::highlightButton()
 {
     UTFT* tft = Controller::GetInstance()->getTFT();
-    tft->setColor(VGA_AQUA);
+    tft->setColor(BUTTON_HIGHLIGHT_COLOR);
     tft->fillRoundRect(posX, posY, posX + width, posY + height);
-    tft->setColor(VGA_WHITE);
+    tft->setColor(BUTTON_TEXT_COLOR);
     tft->drawRoundRect(posX, posY, posX + width, posY + height);
 
     uint16_t textX = ((width/2) - ((strlen(label) * tft->getFontXsize())/2)) + posX;
     uint16_t textY = (height/2) - (tft->getFontYsize()/2) + posY;
 
-    tft->setBackColor(VGA_AQUA);
+    tft->setBackColor(BUTTON_HIGHLIGHT_COLOR);
     tft->print(label, textX, textY);
 }

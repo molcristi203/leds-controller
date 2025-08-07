@@ -9,8 +9,11 @@ LedController::LedController()
     FastLED.setBrightness(10);
     currentLeds = &staticLeds;
     currentLeds->applyToLeds();
+
     pinMode(PIN_STRIP_RELAY, OUTPUT);
-    digitalWrite(PIN_STRIP_RELAY, relay1State);
+    digitalWrite(PIN_STRIP_RELAY, relayStripState);
+    pinMode(PIN_LAMP_RELAY, OUTPUT);
+    digitalWrite(PIN_LAMP_RELAY, relayStripState);
 }
 
 LedController* LedController::GetInstance()
@@ -33,19 +36,30 @@ void LedController::getStaticRGB(uint8_t &red, uint8_t &green, uint8_t &blue)
     staticLeds.getRGB(red, green, blue);
 }
 
-void LedController::toggleLedRelay1()
+void LedController::toggleStripRelay()
 {
-    if (relay1State == LOW)
+    if (relayStripState == LOW)
     {
-        relay1State = HIGH;
+        relayStripState = HIGH;
     }
     else
     {
-        relay1State = LOW;
+        relayStripState = LOW;
     }
+    digitalWrite(PIN_STRIP_RELAY, relayStripState);
+}
 
-    Serial.println(relay1State);
-    digitalWrite(PIN_STRIP_RELAY, relay1State);
+void LedController::toggleLampRelay()
+{
+    if (relayLampState == LOW)
+    {
+        relayLampState = HIGH;
+    }
+    else
+    {
+        relayLampState = LOW;
+    }
+    digitalWrite(PIN_STRIP_RELAY, relayLampState);
 }
 
 void LedController::changeLedsEffect(LedsEffects ledsEffect)
@@ -72,4 +86,29 @@ void LedController::refreshLeds()
 void LedController::changeRainbowLedsType(RainbowTypes rainbowType)
 {
     rainbowLeds.changeRainbowType(rainbowType);
+}
+
+void LedController::increaseRainbowSpeed()
+{
+    uint8_t index = rainbowLeds.getHueChangeDelayIndex();
+    if (index < rainbowLeds.MAX_DELAYS - 1)
+    {
+        index++;
+        rainbowLeds.setHueChangeDelayIndex(index);
+    }
+}
+
+void LedController::decreaseRainbowSpeed()
+{
+    uint8_t index = rainbowLeds.getHueChangeDelayIndex();
+    if (index > 0)
+    {
+        index--;
+        rainbowLeds.setHueChangeDelayIndex(index);
+    }
+}
+
+uint8_t LedController::getHueChangeDelayIndex()
+{
+    return rainbowLeds.getHueChangeDelayIndex();
 }
