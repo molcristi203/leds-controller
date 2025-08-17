@@ -78,7 +78,15 @@ void RainbowPage::handleTouch(const InputEvent &event)
 }
 
 void RainbowPage::onPageChanged()
-{}
+{
+    InputEvent event =
+    {
+    .posX = 0,
+    .posY = 0,
+    .eventType = INPUT_RELEASE
+    };
+    handleTouch(event);
+}
 
 void RainbowPage::updateLabel()
 {

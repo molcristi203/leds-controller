@@ -12,7 +12,7 @@
 #define pulse_high(reg, bitmask) sbi(reg, bitmask); cbi(reg, bitmask);
 #define pulse_low(reg, bitmask) cbi(reg, bitmask); sbi(reg, bitmask);
 
-#define utft_swap(type, i, j) {type t = i; i = j; j = t;}
+#define swap(type, i, j) {type t = i; i = j; j = t;}
 
 #if defined(TEENSYDUINO) && TEENSYDUINO >= 117
   #define regtype volatile uint8_t

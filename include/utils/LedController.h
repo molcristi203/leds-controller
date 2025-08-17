@@ -7,11 +7,15 @@
 #include "leds/BaseLeds.h"
 #include "leds/StaticLeds.h"
 #include "leds/RainbowLeds.h"
+#include "leds/TheaterLeds.h"
+#include "leds/TemperatureLeds.h"
 
 enum LedsEffects : uint8_t
 {
     LEDS_STATIC,
-    LEDS_RAINBOW
+    LEDS_RAINBOW,
+    LEDS_THEATER,
+    LEDS_TEMPERATURE
 };
 
 class LedController
@@ -23,10 +27,12 @@ class LedController
         static constexpr uint8_t PIN_LAMP_DATA = 9;
         static constexpr uint16_t NUM_STRIP_LEDS = 20;
 
-        CRGB leds1[NUM_STRIP_LEDS];
+        CRGB ledsStrip[NUM_STRIP_LEDS];
 
         StaticLeds staticLeds;
         RainbowLeds rainbowLeds;
+        TheaterLeds theaterLeds;
+        TemperatureLeds temperatureLeds;
         BaseLeds* currentLeds = nullptr;
 
         volatile uint8_t relayStripState = LOW;
@@ -41,6 +47,9 @@ class LedController
 
         void setStaticRGB(uint8_t red, uint8_t green, uint8_t blue);
         void getStaticRGB(uint8_t &red, uint8_t &green, uint8_t &blue);
+
+        void setTemperatureRGB(uint8_t red, uint8_t green, uint8_t blue);
+        void getTemperatureRGB(uint8_t &red, uint8_t &green, uint8_t &blue);
 
         void changeRainbowLedsType(RainbowTypes rainbowType);
 

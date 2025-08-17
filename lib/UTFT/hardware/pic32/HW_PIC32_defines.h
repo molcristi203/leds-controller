@@ -12,10 +12,10 @@
 #define pulse_high(reg, bitmask) sbi(reg, bitmask); cbi(reg, bitmask);
 #define pulse_low(reg, bitmask) cbi(reg, bitmask); sbi(reg, bitmask);
 
-#define utft_cport(port, data) port &= data
-#define utft_sport(port, data) port |= data
+#define cport(port, data) port &= data
+#define sport(port, data) port |= data
 
-#define utft_swap(type, i, j) {type t = i; i = j; j = t;}
+#define swap(type, i, j) {type t = i; i = j; j = t;}
 
 #define fontbyte(x) cfont.font[x]  
 

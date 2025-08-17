@@ -4,7 +4,7 @@ void UTFT::_hw_special_init()
 }
 
 void UTFT::LCD_Writ_Bus(char VH,char VL, byte mode)
-{
+{   
 	switch (mode)
 	{
 	case 1:
@@ -73,8 +73,8 @@ void UTFT::LCD_Writ_Bus(char VH,char VL, byte mode)
 		break;
 	case 16:
 		PORTD = VH;
-		utft_cport(PORTC, 0xFC);
-		utft_sport(PORTC, (VL>>6) & 0x03);
+		cport(PORTC, 0xFC);
+		sport(PORTC, (VL>>6) & 0x03);
 		PORTB =  VL & 0x3F;
 		pulse_low(P_WR, B_WR);
 		break;
@@ -112,8 +112,8 @@ void UTFT::_fast_fill_16(int ch, int cl, long pix)
 	long blocks;
 
 	PORTD = ch;
-	utft_cport(PORTC, 0xFC);
-	utft_sport(PORTC, (cl>>6) & 0x03);
+	cport(PORTC, 0xFC);
+	sport(PORTC, (cl>>6) & 0x03);
 	PORTB =  cl & 0x3F;
 
 	blocks = pix/16;

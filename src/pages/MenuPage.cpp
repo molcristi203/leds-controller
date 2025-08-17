@@ -32,11 +32,23 @@ static void toggleLamp()
     LedController::GetInstance()->toggleLampRelay();
 }
 
+static void theaterButtonFunc()
+{
+    LedController::GetInstance()->changeLedsEffect(LEDS_THEATER);
+}
+
+static void nextButtonFunc()
+{
+    Controller::GetInstance()->setNextPage(SECOND_MENU_PAGE_ID);
+}
+
 MenuPage::MenuPage() :
     staticButton(MENU_BUTTONS_SPACE, MENU_BUTTONS_SPACE, MENU_BUTTONS_SIZE, MENU_BUTTONS_SIZE, "Static"),
     rainbowButton(MENU_BUTTONS_SPACE * 2 + MENU_BUTTONS_SIZE, MENU_BUTTONS_SPACE, MENU_BUTTONS_SIZE, MENU_BUTTONS_SIZE, "Rainbow"),
     stripToggleButton(MENU_BUTTONS_SPACE, MENU_BUTTONS_SPACE * 2 + MENU_BUTTONS_SIZE, MENU_BUTTONS_SIZE, MENU_BUTTONS_SIZE, "Strip"),
-    lampToggleButton(MENU_BUTTONS_SPACE * 2 + MENU_BUTTONS_SIZE, MENU_BUTTONS_SPACE * 2 + MENU_BUTTONS_SIZE, MENU_BUTTONS_SIZE, MENU_BUTTONS_SIZE, "Lamp")
+    lampToggleButton(MENU_BUTTONS_SPACE * 2 + MENU_BUTTONS_SIZE, MENU_BUTTONS_SPACE * 2 + MENU_BUTTONS_SIZE, MENU_BUTTONS_SIZE, MENU_BUTTONS_SIZE, "Lamp"),
+    theaterButton(MENU_BUTTONS_SPACE * 3 + MENU_BUTTONS_SIZE * 2, MENU_BUTTONS_SPACE, MENU_BUTTONS_SIZE, MENU_BUTTONS_SIZE, "Theater"),
+    nextButton(MENU_BUTTONS_SPACE * 3 + MENU_BUTTONS_SIZE * 2, MENU_BUTTONS_SPACE * 2 + MENU_BUTTONS_SIZE, MENU_BUTTONS_SIZE, MENU_BUTTONS_SIZE, "Next")
 {
     staticButton.setPressFunction(&shortStaticButtonFunc);
     staticButton.setHoldFunction(&longStaticButtonFunc);
@@ -46,6 +58,8 @@ MenuPage::MenuPage() :
     stripToggleButton.setSecondaryPressFunction(&toggleStrip);
     lampToggleButton.setPressFunction(&toggleLamp);
     lampToggleButton.setSecondaryPressFunction(&toggleLamp);
+    theaterButton.setPressFunction(&theaterButtonFunc);
+    nextButton.setPressFunction(&nextButtonFunc);
 }
 
 void MenuPage::drawPage()
@@ -54,6 +68,8 @@ void MenuPage::drawPage()
     rainbowButton.drawButton();
     stripToggleButton.drawButton();
     lampToggleButton.drawButton();
+    theaterButton.drawButton();
+    nextButton.drawButton();
 }
 
 void MenuPage::handleTouch(const InputEvent &event)
@@ -65,6 +81,10 @@ void MenuPage::handleTouch(const InputEvent &event)
     if (stripToggleButton.handleButtonTouch(event))
         return;
     if (lampToggleButton.handleButtonTouch(event))
+        return;
+    if (theaterButton.handleButtonTouch(event))
+        return;
+    if (nextButton.handleButtonTouch(event))
         return;
 }
 

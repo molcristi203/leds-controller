@@ -10,13 +10,15 @@ enum PagesIds : uint8_t
 {
     MENU_PAGE_ID,
     STATIC_PAGE_ID,
-    RAINBOW_PAGE_ID
+    RAINBOW_PAGE_ID,
+    SECOND_MENU_PAGE_ID,
+    TEMPERATURE_PAGE_ID
 };
 
 class Controller
 {
     private:
-        static constexpr uint8_t MAX_PAGES = 3;
+        static constexpr uint8_t MAX_PAGES = 5;
 
         UTFT* tft = nullptr;
         URTouch* touch = nullptr;

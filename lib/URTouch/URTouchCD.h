@@ -6,7 +6,7 @@
 // that came with this library and follow the on-screen instructions to
 // update this file.
 //
-// Remember that is you have multiple display modules they will probably 
+// Remember that is you have multiple display modules they will probably
 // require different calibration data so you should run the calibration
 // every time you switch to another module.
 // You can, of course, store calibration data for all your modules here
@@ -17,6 +17,6 @@
 // They MIGHT work on your 320x240 display module, but you should run the
 // calibration sketch anyway. If you are using a display with any other
 // resolution you MUST calibrate it as these settings WILL NOT work.
-#define CAL_X 0x03C48116UL
-#define CAL_Y 0x03DD418CUL
+#define CAL_X 0x03C60128UL
+#define CAL_Y 0x03DD419FUL
 #define CAL_S 0x000EF13FUL

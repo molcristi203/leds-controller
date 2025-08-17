@@ -2,10 +2,13 @@
 
 LedController* LedController::instance{nullptr};
 
-LedController::LedController()
-: staticLeds(leds1, NUM_STRIP_LEDS), rainbowLeds(leds1, NUM_STRIP_LEDS)
+LedController::LedController() :
+    staticLeds(ledsStrip, NUM_STRIP_LEDS),
+    rainbowLeds(ledsStrip, NUM_STRIP_LEDS),
+    theaterLeds(ledsStrip, NUM_STRIP_LEDS),
+    temperatureLeds(ledsStrip, NUM_STRIP_LEDS)
 {
-    FastLED.addLeds<WS2812B, PIN_STRIP_DATA, GRB>(leds1, NUM_STRIP_LEDS);
+    FastLED.addLeds<WS2812B, PIN_STRIP_DATA, GRB>(ledsStrip, NUM_STRIP_LEDS);
     FastLED.setBrightness(10);
     currentLeds = &staticLeds;
     currentLeds->applyToLeds();
@@ -34,6 +37,17 @@ void LedController::setStaticRGB(uint8_t red, uint8_t green, uint8_t blue)
 void LedController::getStaticRGB(uint8_t &red, uint8_t &green, uint8_t &blue)
 {
     staticLeds.getRGB(red, green, blue);
+}
+
+void LedController::setTemperatureRGB(uint8_t red, uint8_t green, uint8_t blue)
+{
+    temperatureLeds.setRGB(red, green, blue);
+    temperatureLeds.applyToLeds();
+}
+
+void LedController::getTemperatureRGB(uint8_t &red, uint8_t &green, uint8_t &blue)
+{
+    temperatureLeds.getRGB(red, green, blue);
 }
 
 void LedController::toggleStripRelay()
@@ -72,6 +86,11 @@ void LedController::changeLedsEffect(LedsEffects ledsEffect)
         case LEDS_RAINBOW:
             currentLeds = &rainbowLeds;
             break;
+        case LEDS_THEATER:
+            currentLeds = &theaterLeds;
+            break;
+        case LEDS_TEMPERATURE:
+            currentLeds = &temperatureLeds;
         default:
             break;
     }

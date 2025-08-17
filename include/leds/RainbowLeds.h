@@ -21,8 +21,8 @@ class RainbowLeds : public BaseLeds
         void setHueChangeDelayIndex(uint8_t hueChangeDelayIndex);
 
     private:
-        static constexpr uint8_t HUE_INCREMENT = 1u;
-        static constexpr uint8_t DELTA_HUE = 1u;
+        static constexpr uint8_t HUE_INCREMENT = 3u;
+        static constexpr uint8_t DELTA_HUE = 3u;
         uint64_t HUE_CHANGE_DELAYS[MAX_DELAYS] = {75u, 50u, 25u};
 
         uint8_t initialHue = 0u;
