@@ -2,27 +2,27 @@
 
 static void color1ButtonFunc()
 {
-    LedController::GetInstance()->setTemperatureRGB(255, 147, 41);
+    // LedController::GetInstance()->setTemperatureRGB(255, 147, 41);
 }
 
 static void color2ButtonFunc()
 {
-    LedController::GetInstance()->setTemperatureRGB(255, 187, 120);
+    // LedController::GetInstance()->setTemperatureRGB(255, 187, 120);
 }
 
 static void color3ButtonFunc()
 {
-    LedController::GetInstance()->setTemperatureRGB(255, 238, 227);
+    // LedController::GetInstance()->setTemperatureRGB(255, 238, 227);
 }
 
 static void color4ButtonFunc()
 {
-    LedController::GetInstance()->setTemperatureRGB(235, 238, 255);
+    // LedController::GetInstance()->setTemperatureRGB(235, 238, 255);
 }
 
 static void color5ButtonFunc()
 {
-    LedController::GetInstance()->setTemperatureRGB(214, 225, 255);
+    // LedController::GetInstance()->setTemperatureRGB(214, 225, 255);
 }
 
 static void menuButtonFunc()

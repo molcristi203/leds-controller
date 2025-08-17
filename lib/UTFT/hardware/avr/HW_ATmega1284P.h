@@ -4,7 +4,7 @@ void UTFT::_hw_special_init()
 }
 
 void UTFT::LCD_Writ_Bus(char VH,char VL, byte mode)
-{   
+{
 	switch (mode)
 	{
 	case 1:
@@ -66,37 +66,37 @@ void UTFT::LCD_Writ_Bus(char VH,char VL, byte mode)
 		pulse_low(P_SCL, B_SCL);
 		break;
 	case 8:
-		cport (PORTD, 0xF0);
-		sport (PORTD, (VH & 0x0F));
-		cport (PORTB, 0xF0);
-		sport (PORTB, (VH & 0xF0)>>4);
+		ur_cport (PORTD, 0xF0);
+		ur_sport (PORTD, (VH & 0x0F));
+		ur_cport (PORTB, 0xF0);
+		ur_sport (PORTB, (VH & 0xF0)>>4);
 		pulse_low(P_WR, B_WR);
-		cport (PORTD, 0xF0);
-		sport (PORTD, (VL & 0x0F));
-		cport (PORTB, 0xF0);
-		sport (PORTB, (VL & 0xF0)>>4);
+		ur_cport (PORTD, 0xF0);
+		ur_sport (PORTD, (VL & 0x0F));
+		ur_cport (PORTB, 0xF0);
+		ur_sport (PORTB, (VL & 0xF0)>>4);
 		pulse_low(P_WR, B_WR);
 		break;
 	case 16:
-		cport (PORTD, 0x90);
-		sport (PORTD, (VH & 0x0F) | ((VL & 0x03)<<5));
+		ur_cport (PORTD, 0x90);
+		ur_sport (PORTD, (VH & 0x0F) | ((VL & 0x03)<<5));
 		PORTB = ((VH & 0xF0)>>4) | ((VL & 0x3C)<<2);
-		cport (PORTA, 0x3F);
-		sport (PORTA, ((VL & 0x40)<<1) | ((VL & 0x80)>>1));
+		ur_cport (PORTA, 0x3F);
+		ur_sport (PORTA, ((VL & 0x40)<<1) | ((VL & 0x80)>>1));
 		pulse_low(P_WR, B_WR);
 		break;
 	case LATCHED_16:
-		cport (PORTD, 0xF0);
-		sport (PORTD, (VH & 0x0F));
-		cport (PORTB, 0xF0);
-		sport (PORTB, (VH & 0xF0)>>4);
+		ur_cport (PORTD, 0xF0);
+		ur_sport (PORTD, (VH & 0x0F));
+		ur_cport (PORTB, 0xF0);
+		ur_sport (PORTB, (VH & 0xF0)>>4);
 		cbi(P_ALE, B_ALE);
 		pulse_high(P_ALE, B_ALE);
 		cbi(P_CS, B_CS);
-		cport (PORTD, 0xF0);
-		sport (PORTD, (VL & 0x0F));
-		cport (PORTB, 0xF0);
-		sport (PORTB, (VL & 0xF0)>>4);
+		ur_cport (PORTD, 0xF0);
+		ur_sport (PORTD, (VL & 0x0F));
+		ur_cport (PORTB, 0xF0);
+		ur_sport (PORTB, (VL & 0xF0)>>4);
 		pulse_low(P_WR, B_WR);
 		sbi(P_CS, B_CS);
 		break;
@@ -105,10 +105,10 @@ void UTFT::LCD_Writ_Bus(char VH,char VL, byte mode)
 
 void UTFT::LCD_Write_Bus_8(char VL)
 {
-	cport (PORTD, 0xF0);
-	sport (PORTD, (VL & 0x0F));
-	cport (PORTB, 0xF0);
-	sport (PORTB, (VL & 0xF0)>>4);
+	ur_cport (PORTD, 0xF0);
+	ur_sport (PORTD, (VL & 0x0F));
+	ur_cport (PORTB, 0xF0);
+	ur_sport (PORTB, (VL & 0xF0)>>4);
     pulse_low(P_WR, B_WR);
 }
 
@@ -129,11 +129,11 @@ void UTFT::_fast_fill_16(int ch, int cl, long pix)
 {
 	long blocks;
 
-	cport (PORTD, 0x90);
-	sport (PORTD, (ch & 0x0F) | ((cl & 0x03)<<5));
+	ur_cport (PORTD, 0x90);
+	ur_sport (PORTD, (ch & 0x0F) | ((cl & 0x03)<<5));
 	PORTB = ((ch & 0xF0)>>4) | ((cl & 0x3C)<<2);
-	cport (PORTA, 0x3F);
-	sport (PORTA, ((cl & 0x40)<<1) | ((cl & 0x80)>>1));
+	ur_cport (PORTA, 0x3F);
+	ur_sport (PORTA, ((cl & 0x40)<<1) | ((cl & 0x80)>>1));
 
 	blocks = pix/16;
 	for (int i=0; i<blocks; i++)
@@ -166,10 +166,10 @@ void UTFT::_fast_fill_8(int ch, long pix)
 {
 	long blocks;
 
-	cport (PORTD, 0xF0);
-	sport (PORTD, (ch & 0x0F));
-	cport (PORTB, 0xF0);
-	sport (PORTB, (ch & 0xF0)>>4);
+	ur_cport (PORTD, 0xF0);
+	ur_sport (PORTD, (ch & 0x0F));
+	ur_cport (PORTB, 0xF0);
+	ur_sport (PORTB, (ch & 0xF0)>>4);
 
 	blocks = pix/16;
 	for (int i=0; i<blocks; i++)
