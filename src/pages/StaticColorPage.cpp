@@ -2,7 +2,8 @@
 
 static void colorCallback(uint8_t red, uint8_t green, uint8_t blue)
 {
-    LedController::GetInstance()->setStaticRGB(red, green, blue);
+    LedController::GetInstance()->setStaticRGB(red, green, blue, LedController::STRIP_INDEX);
+    LedController::GetInstance()->setStaticRGB(red, green, blue, LedController::LAMP_INDEX);
 }
 
 static void backToMenu()
@@ -10,9 +11,8 @@ static void backToMenu()
     Controller::GetInstance()->setNextPage(MENU_PAGE_ID);
 }
 
-StaticColorPage::StaticColorPage() :
-    colorWheel(0, 19),
-    menuButton(220, 19, 60, 60, "Menu")
+StaticColorPage::StaticColorPage() : colorWheel(0, 19),
+                                     menuButton(220, 19, 60, 60, "Menu")
 {
     colorWheel.setCallbackFunction(&colorCallback);
     menuButton.setPressFunction(&backToMenu);
@@ -43,10 +43,9 @@ void StaticColorPage::handleTouch(const InputEvent &event)
 void StaticColorPage::onPageChanged()
 {
     InputEvent event =
-    {
-    .posX = 0,
-    .posY = 0,
-    .eventType = INPUT_RELEASE
-    };
+        {
+            .posX = 0,
+            .posY = 0,
+            .eventType = INPUT_RELEASE};
     handleTouch(event);
 }

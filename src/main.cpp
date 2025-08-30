@@ -13,8 +13,8 @@
 static UTFT myGLCD(ILI9341_8, 38, 39, 40, 41);
 static URTouch myTouch(6, 5, 4, 3, 2);
 
-static Controller* controller;
-static LedController* ledController;
+static Controller *controller;
+static LedController *ledController;
 static StaticColorPage staticColorPage;
 static MenuPage menuPage;
 static RainbowPage rainbowPage;
@@ -68,21 +68,19 @@ void loop()
       {
         touched = true;
         InputEvent event =
-        {
-          .posX = lastX,
-          .posY = lastY,
-          .eventType = INPUT_PRESS
-        };
+            {
+                .posX = lastX,
+                .posY = lastY,
+                .eventType = INPUT_PRESS};
         controller->getCurrentPage()->handleTouch(event);
       }
       else
       {
         InputEvent event =
-        {
-          .posX = lastX,
-          .posY = lastY,
-          .eventType = INPUT_HOLD
-        };
+            {
+                .posX = lastX,
+                .posY = lastY,
+                .eventType = INPUT_HOLD};
         controller->getCurrentPage()->handleTouch(event);
       }
     }
@@ -93,16 +91,16 @@ void loop()
     {
       touched = false;
       InputEvent event =
-      {
-        .posX = lastX,
-        .posY = lastY,
-        .eventType = INPUT_RELEASE
-      };
+          {
+              .posX = lastX,
+              .posY = lastY,
+              .eventType = INPUT_RELEASE};
       controller->getCurrentPage()->handleTouch(event);
     }
   }
 
   controller->changePage();
 
-  ledController->refreshLeds();
+  ledController->refreshLeds(LedController::STRIP_INDEX);
+  ledController->refreshLeds(LedController::LAMP_INDEX);
 }

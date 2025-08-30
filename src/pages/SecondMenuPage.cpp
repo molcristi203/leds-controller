@@ -7,19 +7,20 @@ static void previousButtonFunc()
 
 static void shortTemperatureFunc()
 {
-    LedController::GetInstance()->changeLedsEffect(LEDS_TEMPERATURE);
+    LedController::GetInstance()->changeLedsEffect(LEDS_TEMPERATURE, LedController::STRIP_INDEX);
+    LedController::GetInstance()->changeLedsEffect(LEDS_TEMPERATURE, LedController::LAMP_INDEX);
 }
 
 static void longTemperatureFunc()
 {
-    LedController::GetInstance()->changeLedsEffect(LEDS_TEMPERATURE);
+    LedController::GetInstance()->changeLedsEffect(LEDS_TEMPERATURE, LedController::STRIP_INDEX);
+    LedController::GetInstance()->changeLedsEffect(LEDS_TEMPERATURE, LedController::LAMP_INDEX);
     Controller::GetInstance()->setNextPage(TEMPERATURE_PAGE_ID);
 }
 
-SecondMenuPage::SecondMenuPage() :
-    previousButton(MENU_BUTTONS_SPACE, MENU_BUTTONS_SPACE, MENU_BUTTONS_SIZE, MENU_BUTTONS_SIZE, "Previous"),
-    temperatureButton(MENU_BUTTONS_SPACE * 2 + MENU_BUTTONS_SIZE, MENU_BUTTONS_SPACE, MENU_BUTTONS_SIZE, MENU_BUTTONS_SIZE, "Temperature"),
-    gradientButton(MENU_BUTTONS_SPACE * 3 + MENU_BUTTONS_SIZE * 2, MENU_BUTTONS_SPACE, MENU_BUTTONS_SIZE, MENU_BUTTONS_SIZE, "Gradient")
+SecondMenuPage::SecondMenuPage() : previousButton(MENU_BUTTONS_SPACE, MENU_BUTTONS_SPACE, MENU_BUTTONS_SIZE, MENU_BUTTONS_SIZE, "Previous"),
+                                   temperatureButton(MENU_BUTTONS_SPACE * 2 + MENU_BUTTONS_SIZE, MENU_BUTTONS_SPACE, MENU_BUTTONS_SIZE, MENU_BUTTONS_SIZE, "Temperature"),
+                                   gradientButton(MENU_BUTTONS_SPACE * 3 + MENU_BUTTONS_SIZE * 2, MENU_BUTTONS_SPACE, MENU_BUTTONS_SIZE, MENU_BUTTONS_SIZE, "Gradient")
 {
     previousButton.setPressFunction(&previousButtonFunc);
     temperatureButton.setPressFunction(&shortTemperatureFunc);
@@ -46,10 +47,9 @@ void SecondMenuPage::handleTouch(const InputEvent &event)
 void SecondMenuPage::onPageChanged()
 {
     InputEvent event =
-    {
-    .posX = 0,
-    .posY = 0,
-    .eventType = INPUT_RELEASE
-    };
+        {
+            .posX = 0,
+            .posY = 0,
+            .eventType = INPUT_RELEASE};
     handleTouch(event);
 }

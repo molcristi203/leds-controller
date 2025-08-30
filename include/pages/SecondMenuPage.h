@@ -9,18 +9,19 @@
 
 class SecondMenuPage : public ScreenPage
 {
-    private:
-        static constexpr uint16_t MENU_BUTTONS_SPACE = 5u;
-        static constexpr uint16_t MENU_BUTTONS_SIZE = 100u;
+private:
+    static constexpr uint16_t MENU_BUTTONS_SPACE = 5u;
+    static constexpr uint16_t MENU_BUTTONS_SIZE = 100u;
 
-        SimpleButton previousButton;
-        ComplexButton temperatureButton;
-        ComplexButton gradientButton;
-    public:
-        SecondMenuPage();
-        void drawPage() override;
-        void handleTouch(const InputEvent &event) override;
-        void onPageChanged() override;
+    SimpleButton previousButton;
+    ComplexButton temperatureButton;
+    ComplexButton gradientButton;
+
+public:
+    SecondMenuPage();
+    void drawPage() override;
+    void handleTouch(const InputEvent &event) override;
+    void onPageChanged() override;
 };
 
 #endif

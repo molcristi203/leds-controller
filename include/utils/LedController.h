@@ -20,48 +20,56 @@ enum LedsEffects : uint8_t
 
 class LedController
 {
-    private:
-        static constexpr uint8_t PIN_STRIP_RELAY = A8;
-        static constexpr uint8_t PIN_STRIP_DATA = 8;
-        static constexpr uint8_t PIN_LAMP_RELAY = A9;
-        static constexpr uint8_t PIN_LAMP_DATA = 9;
-        static constexpr uint16_t NUM_STRIP_LEDS = 20;
+private:
+    static constexpr uint8_t PIN_STRIP_RELAY = A8;
+    static constexpr uint8_t PIN_STRIP_DATA = 8;
+    static constexpr uint8_t PIN_LAMP_RELAY = A9;
+    static constexpr uint8_t PIN_LAMP_DATA = 9;
+    static constexpr uint16_t NUM_STRIP_LEDS = 600u;
+    static constexpr uint16_t NUM_LAMP_LEDS = 43u;
+    static constexpr uint8_t NUM_TOTAL_STRIPS = 2u;
+    static constexpr uint8_t LED_BRIGHTNESS = 128u;
 
-        CRGB ledsStrip[NUM_STRIP_LEDS];
+    CRGB ledsStrip[NUM_STRIP_LEDS];
+    CRGB ledsLamp[NUM_LAMP_LEDS];
 
-        StaticLeds staticLeds;
-        RainbowLeds rainbowLeds;
-        TheaterLeds theaterLeds;
-        TemperatureLeds temperatureLeds;
-        BaseLeds* currentLeds = nullptr;
+    StaticLeds staticLeds[NUM_TOTAL_STRIPS];
+    RainbowLeds rainbowLeds[NUM_TOTAL_STRIPS];
+    TheaterLeds theaterLeds[NUM_TOTAL_STRIPS];
+    TemperatureLeds temperatureLeds[NUM_TOTAL_STRIPS];
+    BaseLeds *currentLeds[NUM_TOTAL_STRIPS] = {nullptr, nullptr};
 
-        volatile uint8_t relayStripState = LOW;
-        volatile uint8_t relayLampState = LOW;
+    volatile uint8_t relayStripState = LOW;
+    volatile uint8_t relayLampState = LOW;
 
-        static LedController* instance;
-        LedController();
-        LedController(const LedController&) = delete;
-        LedController& operator=(const LedController&) = delete;
-    public:
-        static LedController* GetInstance();
+    static LedController *instance;
+    LedController();
+    LedController(const LedController &) = delete;
+    LedController &operator=(const LedController &) = delete;
 
-        void setStaticRGB(uint8_t red, uint8_t green, uint8_t blue);
-        void getStaticRGB(uint8_t &red, uint8_t &green, uint8_t &blue);
+public:
+    static constexpr uint8_t STRIP_INDEX = 0u;
+    static constexpr uint8_t LAMP_INDEX = 1u;
 
-        void setTemperatureRGB(uint8_t red, uint8_t green, uint8_t blue);
-        void getTemperatureRGB(uint8_t &red, uint8_t &green, uint8_t &blue);
+    static LedController *GetInstance();
 
-        void changeRainbowLedsType(RainbowTypes rainbowType);
+    void setStaticRGB(uint8_t red, uint8_t green, uint8_t blue, uint8_t index);
+    void getStaticRGB(uint8_t &red, uint8_t &green, uint8_t &blue, uint8_t index);
 
-        void changeLedsEffect(LedsEffects ledsEffect);
-        void refreshLeds();
+    void setTemperatureRGB(uint8_t red, uint8_t green, uint8_t blue, uint8_t index);
+    void getTemperatureRGB(uint8_t &red, uint8_t &green, uint8_t &blue, uint8_t index);
 
-        void toggleStripRelay();
-        void toggleLampRelay();
+    void changeRainbowLedsType(RainbowTypes rainbowType, uint8_t index);
 
-        void increaseRainbowSpeed();
-        void decreaseRainbowSpeed();
-        uint8_t getHueChangeDelayIndex();
+    void changeLedsEffect(LedsEffects ledsEffect, uint8_t index);
+    void refreshLeds(uint8_t index);
+
+    void toggleStripRelay();
+    void toggleLampRelay();
+
+    void increaseRainbowSpeed(uint8_t index);
+    void decreaseRainbowSpeed(uint8_t index);
+    uint8_t getHueChangeDelayIndex(uint8_t index);
 };
 
 #endif

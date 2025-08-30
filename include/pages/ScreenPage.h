@@ -7,10 +7,10 @@
 
 class ScreenPage
 {
-    public:
-        virtual void drawPage();
-        virtual void handleTouch(const InputEvent &event);
-        virtual void onPageChanged();
+public:
+    virtual void drawPage();
+    virtual void handleTouch(const InputEvent &event);
+    virtual void onPageChanged();
 };
 
 #endif

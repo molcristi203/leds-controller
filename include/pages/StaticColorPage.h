@@ -8,14 +8,15 @@
 
 class StaticColorPage : public ScreenPage
 {
-    private:
-        ColorWheel colorWheel;
-        SimpleButton menuButton;
-    public:
-        StaticColorPage();
-        void drawPage() override;
-        void handleTouch(const InputEvent &event) override;
-        void onPageChanged() override;
+private:
+    ColorWheel colorWheel;
+    SimpleButton menuButton;
+
+public:
+    StaticColorPage();
+    void drawPage() override;
+    void handleTouch(const InputEvent &event) override;
+    void onPageChanged() override;
 };
 
 #endif
